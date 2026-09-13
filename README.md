@@ -28,4 +28,4 @@ View your app in AI Studio: https://ai.studio/apps/a6a0b893-c994-4847-ab3c-3a300
 
 ### Cadastro de usuários
 
-O cadastro deve ser feito pela tela de login da aplicação. Usuários criados diretamente no painel do Supabase Authentication não são importados para `customers`.
+O acesso deve ser provisionado por um administrador no Supabase Authentication. A tela de login da aplicação não oferece cadastro público de novas contas.
