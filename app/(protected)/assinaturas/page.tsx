@@ -117,7 +117,8 @@ export default function AssinaturasPage() {
       handleCloseModal();
       loadData();
     } catch (error) {
-      toast.error('Erro ao salvar assinatura');
+      const message = error instanceof Error ? error.message : 'Erro ao salvar assinatura';
+      toast.error(message);
     } finally {
       setIsSaving(false);
     }

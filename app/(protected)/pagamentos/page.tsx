@@ -120,7 +120,8 @@ export default function PagamentosPage() {
       handleCloseModal();
       loadData();
     } catch (error) {
-      toast.error('Erro ao registrar pagamento');
+      const message = error instanceof Error ? error.message : 'Erro ao registrar pagamento';
+      toast.error(message);
     } finally {
       setIsSaving(false);
     }

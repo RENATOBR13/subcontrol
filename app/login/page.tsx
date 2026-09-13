@@ -106,6 +106,8 @@ export default function LoginPage() {
               >
                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Entrar'}
               </button>
+              <p className="mt-3 text-center text-xs text-gray-500">e-mail : admin@admin.com</p>
+              <p className="mt-1 text-center text-xs text-gray-500">senha : 123456</p>
             </div>
           </form>
 

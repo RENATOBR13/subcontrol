@@ -83,7 +83,8 @@ export default function PlanosPage() {
       handleCloseModal();
       loadData();
     } catch (error) {
-      toast.error('Erro ao salvar plano');
+      const message = error instanceof Error ? error.message : 'Erro ao salvar plano';
+      toast.error(message);
     } finally {
       setIsSaving(false);
     }
