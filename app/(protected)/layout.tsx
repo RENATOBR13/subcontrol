@@ -61,7 +61,7 @@ export default function ProtectedLayout({
         <div className="flex h-16 shrink-0 items-center px-6 border-b border-gray-200">
           <div className="flex items-center gap-2 text-blue-600">
              <CreditCard className="w-6 h-6" />
-             <span className="text-xl font-bold text-gray-900 tracking-tight">SubControl</span>
+             <span className="text-xl font-bold text-gray-900 tracking-tight">Controle de Assinaturas</span>
           </div>
         </div>
         <div className="flex flex-1 flex-col overflow-y-auto">

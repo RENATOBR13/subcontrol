@@ -56,7 +56,7 @@ export default function LoginPage() {
           <ShieldCheck className="h-8 w-8" />
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          SubControl
+          Controle de Assinaturas
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Faça login para gerenciar assinaturas

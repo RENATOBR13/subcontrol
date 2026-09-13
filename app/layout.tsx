@@ -3,16 +3,16 @@ import './globals.css';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: 'SubControl',
+  title: 'Controle de Assinaturas',
   description: 'Sistema de gestão de assinaturas e clientes',
   openGraph: {
-    title: 'SubControl',
+    title: 'Controle de Assinaturas',
     description: 'Sistema de gestão de assinaturas e clientes',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SubControl',
+    title: 'Controle de Assinaturas',
     description: 'Sistema de gestão de assinaturas e clientes',
   },
 };
