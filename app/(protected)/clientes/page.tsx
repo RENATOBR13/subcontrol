@@ -71,9 +71,10 @@ export default function ClientesPage() {
         toast.success('Cliente criado com sucesso!');
       }
       handleCloseModal();
-      loadData();
+      await loadData();
     } catch (error) {
-      toast.error('Erro ao salvar cliente');
+      const message = error instanceof Error ? error.message : 'Erro desconhecido';
+      toast.error(`Erro ao salvar cliente: ${message}`);
     } finally {
       setIsSaving(false);
     }
