@@ -3,7 +3,6 @@ import { Customer, Plan, Subscription, Payment } from './interface/types';
 
 // ─── Helpers de mapeamento (snake_case → camelCase) ─────────────────────────
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapCustomer = (row: any): Customer => ({
   id: row.id,
   name: row.name,
@@ -13,7 +12,6 @@ const mapCustomer = (row: any): Customer => ({
   createdAt: row.created_at,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapPlan = (row: any): Plan => ({
   id: row.id,
   name: row.name,
@@ -22,7 +20,6 @@ const mapPlan = (row: any): Plan => ({
   createdAt: row.created_at,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapSubscription = (row: any): Subscription => ({
   id: row.id,
   customerId: row.customer_id,
@@ -33,7 +30,6 @@ const mapSubscription = (row: any): Subscription => ({
   createdAt: row.created_at,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const mapPayment = (row: any): Payment => ({
   id: row.id,
   subscriptionId: row.subscription_id,
