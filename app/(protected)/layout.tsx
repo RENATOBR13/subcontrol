@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { LayoutDashboard, Users, CreditCard, Receipt, LogOut, Package } from 'lucide-react';
 import { toast } from 'sonner';
+import { supabase } from '@/lib/supabase';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -28,16 +29,23 @@ export default function ProtectedLayout({
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    const isAuth = localStorage.getItem('subcontrol_auth');
-    if (!isAuth) {
-      router.push('/login');
-    } else {
-      setTimeout(() => setIsChecking(false), 0);
-    }
+    const checkSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (!data.session) {
+        localStorage.removeItem('subcontrol_auth');
+        router.push('/login');
+      } else {
+        setTimeout(() => setIsChecking(false), 0);
+      }
+    };
+
+    checkSession();
   }, [router]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     localStorage.removeItem('subcontrol_auth');
+    localStorage.removeItem('subcontrol_user');
     toast.success('Sessão encerrada');
     router.push('/login');
   };

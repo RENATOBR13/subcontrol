@@ -4,12 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { ShieldCheck, Loader2 } from 'lucide-react';
-
-type StoredUser = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { supabase } from '@/lib/supabase';
 
 export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login');
@@ -41,19 +36,28 @@ export default function LoginPage() {
     setLoading(true);
     await new Promise(resolve => setTimeout(resolve, 600));
 
-    const storedUsers: StoredUser[] = JSON.parse(
-      localStorage.getItem('subcontrol_users') || '[]'
-    );
-
     if (mode === 'register') {
-      if (storedUsers.some(user => user.email === normalizedEmail)) {
-        toast.error('Já existe uma conta com este e-mail.');
+      const { data, error } = await supabase.auth.signUp({
+        email: normalizedEmail,
+        password,
+        options: {
+          data: { name: name.trim() },
+        },
+      });
+
+      if (error) {
+        toast.error(error.message);
         setLoading(false);
         return;
       }
 
-      storedUsers.push({ name: name.trim(), email: normalizedEmail, password });
-      localStorage.setItem('subcontrol_users', JSON.stringify(storedUsers));
+      if (!data.session) {
+        toast.success('Conta criada! Confira seu e-mail para confirmar o cadastro.');
+        setMode('login');
+        setLoading(false);
+        return;
+      }
+
       localStorage.setItem('subcontrol_user', JSON.stringify({ name: name.trim(), email: normalizedEmail }));
       localStorage.setItem('subcontrol_auth', 'true');
       toast.success('Conta criada com sucesso!');
@@ -61,15 +65,19 @@ export default function LoginPage() {
       return;
     }
 
-    const registeredUser = storedUsers.find(user => user.email === normalizedEmail);
-    if (registeredUser && registeredUser.password !== password) {
-      toast.error('Senha incorreta.');
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: normalizedEmail,
+      password,
+    });
+
+    if (error) {
+      toast.error(error.message);
       setLoading(false);
       return;
     }
 
     localStorage.setItem('subcontrol_user', JSON.stringify({
-      name: registeredUser?.name || normalizedEmail,
+      name: data.user.user_metadata?.name || normalizedEmail,
       email: normalizedEmail,
     }));
     localStorage.setItem('subcontrol_auth', 'true');
