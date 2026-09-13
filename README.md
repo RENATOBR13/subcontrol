@@ -26,6 +26,6 @@ View your app in AI Studio: https://ai.studio/apps/a6a0b893-c994-4847-ab3c-3a300
 3. Configure as variáveis de ambiente `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` com os valores do projeto Supabase.
 4. Faça o deploy. O arquivo `.env.local` não deve ser enviado ao repositório; use as Environment Variables da Vercel.
 
-### Sincronizar usuários com clientes
+### Cadastro de usuários
 
-Execute o arquivo `supabase/migrations/20260913000000_sync_auth_users_to_customers.sql` no SQL Editor do Supabase. Ele cria um cliente automaticamente para cada novo usuário do Supabase Auth e sincroniza os usuários existentes que ainda não estão na tabela `customers`.
+O cadastro deve ser feito pela tela de login da aplicação. Usuários criados diretamente no painel do Supabase Authentication não são importados para `customers`.
